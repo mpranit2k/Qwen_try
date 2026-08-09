@@ -1,0 +1,24 @@
+{
+  "name": "gator-plumbing-landing",
+  "version": "1.0.0",
+  "description": "Premium plumbing business landing page for Gator Plumbing (Buche Plumbing LLC DBA Gator Plumbing)",
+  "scripts": {
+    "dev": "npx http-server -p 3000 -c-1",
+    "build": "echo 'Static site - no build required'",
+    "validate-html": "npx html-validate index.html",
+    "audit": "npx lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html --quiet"
+  },
+  "keywords": [
+    "plumbing",
+    "landing-page",
+    "small-business",
+    "los-fresnos",
+    "texas"
+  ],
+  "author": "Gator Plumbing",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
