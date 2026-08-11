@@ -139,11 +139,30 @@
         // Standalone reveals (section titles, panels)
         var groupSelectors = '.trustbar-grid, .services-grid, .area-grid, .faq-list';
         document.querySelectorAll('[data-reveal]').forEach(function (el) {
-            if (!el.closest(groupSelectors)) {
+            if (el.closest(groupSelectors)) return;
+            if (el.classList.contains('section-title')) {
+                T.titleReveal(el, { y: 0 });
+            } else {
                 T.reveal(el, { y: 24 });
             }
         });
     })();
+
+    /* =========================================
+       Card tilt (Jakub polish + Jhey delight)
+       ========================================= */
+    document.querySelectorAll('.service-card').forEach(function (el) {
+        T.tilt(el);
+    });
+
+    /* =========================================
+       Signature water drops (Jhey, occasional)
+       ========================================= */
+    T.signatureDrops(document.querySelector('.hero'), {
+        className: 'water-drop',
+        intervalMs: 4200,
+        life: 2200
+    });
 
     /* =========================================
        Count-up rating (occasional frequency)

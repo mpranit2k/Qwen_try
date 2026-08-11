@@ -209,49 +209,6 @@
     }
 
     // =========================================
-    // Subtle Water Drop Animation (lazy loaded)
-    // =========================================
-    function initWaterAnimation() {
-        // Only initialize if user doesn't prefer reduced motion
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
-
-        const hero = document.querySelector('.hero');
-        if (!hero) return;
-
-        // Create subtle water drops occasionally
-        function createWaterDrop() {
-            const drop = document.createElement('div');
-            drop.className = 'water-drop';
-            
-            // Random position within hero section
-            const rect = hero.getBoundingClientRect();
-            const x = Math.random() * rect.width;
-            const y = Math.random() * rect.height;
-            
-            drop.style.left = x + 'px';
-            drop.style.top = y + 'px';
-            
-            hero.appendChild(drop);
-            
-            // Remove after animation completes
-            setTimeout(() => {
-                drop.remove();
-            }, 2000);
-        }
-
-        // Create a drop every 3-5 seconds (very subtle)
-        const interval = setInterval(createWaterDrop, 4000);
-
-        // Stop creating drops when page is not visible
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                clearInterval(interval);
-            }
-        });
-    }
-
-    // =========================================
     // Smooth Scroll for Anchor Links
     // =========================================
     function initSmoothScroll() {
@@ -290,17 +247,6 @@
         initNavigation();
         initFormValidation();
         initSmoothScroll();
-        
-        // Lazy-load animations after initial page load
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(() => {
-                initWaterAnimation();
-            });
-        } else {
-            setTimeout(() => {
-                initWaterAnimation();
-            }, 1000);
-        }
     }
 
     // Run initialization when DOM is ready

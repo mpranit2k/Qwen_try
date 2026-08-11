@@ -17,8 +17,8 @@
 
     var DURATIONS = {
         MICRO: 0.18,   // Emil - frequent interactions (nav, hovers)
-        UI: 0.3,       // Jakub - buttons, panels, accordion
-        REVEAL: 0.7,   // Jakub - section reveals (once, occasional)
+        UI: 0.32,      // Jakub - buttons, panels, accordion (200-500ms)
+        REVEAL: 0.6,   // Jakub - section reveals (once, occasional)
         HERO: 1.1      // Jhey  - expressive hero entrance (rare)
     };
 
@@ -28,6 +28,9 @@
         dramatic: 'power4.inOut',
         spring: { type: 'spring', stiffness: 180, damping: 18 }
     };
+
+    // Anti-slop gate: only these properties may animate. (Performance rule)
+    var ANIMATABLE = ['transform', 'opacity', 'clipPath'];
 
     function duration(key) {
         return reduced ? 0.01 : (DURATIONS[key] || DURATIONS.UI);
@@ -98,6 +101,100 @@
                 once: true
             }
         });
+    }
+
+    /**
+     * Title reveal - clip-path sweep. Jhey delight, reserved for
+     * section headings so not every element animates identically
+     * (anti-monotony: avoid the same fade-up everywhere).
+     */
+    function titleReveal(targets, opts) {
+        opts = opts || {};
+        var els = global.gsap.utils.toArray(targets);
+        if (!els.length) return;
+
+        if (reduced) {
+            global.gsap.set(els, { clearProps: 'all', opacity: 1 });
+            return;
+        }
+
+        global.gsap.from(els, {
+            clipPath: 'inset(0 100% 0 0)',
+            opacity: 0.15,
+            duration: duration('REVEAL') + 0.1,
+            ease: EASING.dramatic,
+            stagger: opts.stagger || 0.1,
+            scrollTrigger: {
+                trigger: opts.trigger || els[0],
+                start: 'top 85%',
+                once: true
+            }
+        });
+    }
+
+    /**
+     * Subtle 3D tilt on hover for cards. Jakub polish + Jhey delight:
+     * max 4 degrees, spring return, pointer devices only.
+     */
+    function tilt(el, opts) {
+        if (reduced || !finePointer || !el) return;
+        opts = opts || {};
+        var max = opts.max || 4;
+        var perspective = opts.perspective || 900;
+        var tx = 0;
+        var ty = 0;
+
+        el.addEventListener('mousemove', function (e) {
+            var r = el.getBoundingClientRect();
+            ty = ((e.clientX - r.left) / r.width - 0.5) * 2 * max;
+            tx = -((e.clientY - r.top) / r.height - 0.5) * 2 * max;
+        });
+
+        el.addEventListener('mouseleave', function () {
+            tx = 0;
+            ty = 0;
+        });
+
+        global.gsap.ticker.add(function () {
+            global.gsap.to(el, {
+                rotationX: tx,
+                rotationY: ty,
+                transformPerspective: perspective,
+                duration: 0.5,
+                ease: EASING.smooth,
+                overwrite: 'auto'
+            });
+        });
+    }
+
+    /**
+     * Ambient signature drops (industry signature, Jhey delight).
+     * Occasional frequency: one drop every few seconds, auto-removed.
+     */
+    function signatureDrops(container, opts) {
+        if (reduced || !container) return;
+        opts = opts || {};
+        var intervalMs = opts.intervalMs || 4000;
+        var className = opts.className || 'water-drop';
+        var life = opts.life || 2000;
+
+        function createDrop() {
+            var drop = document.createElement('div');
+            drop.className = className;
+            var rect = container.getBoundingClientRect();
+            drop.style.left = Math.random() * rect.width + 'px';
+            drop.style.top = Math.random() * rect.height + 'px';
+            container.appendChild(drop);
+            setTimeout(function () { drop.remove(); }, life);
+        }
+
+        var interval = setInterval(createDrop, intervalMs);
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) clearInterval(interval);
+        });
+
+        return interval;
     }
 
     /**
@@ -211,9 +308,13 @@
         FINE_POINTER: finePointer,
         DURATIONS: DURATIONS,
         EASING: EASING,
+        ANIMATABLE: ANIMATABLE,
         duration: duration,
         magnetic: magnetic,
         reveal: reveal,
+        titleReveal: titleReveal,
+        tilt: tilt,
+        signatureDrops: signatureDrops,
         countUp: countUp,
         cursor: cursor,
         smoothScroll: smoothScroll,
