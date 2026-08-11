@@ -385,10 +385,21 @@ input, textarea, select {
     left: 0;
     right: 0;
     bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(230, 81, 0, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.hero-bg {
+    position: absolute;
+    top: -10%;
+    left: 0;
+    right: 0;
+    bottom: -10%;
     background-image: url('../images/hero-bg.jpg');
     background-size: cover;
     background-position: center;
-    opacity: 0.15;
+    opacity: 0.18;
+    will-change: transform;
 }
 
 .hero-overlay {
@@ -659,6 +670,10 @@ input, textarea, select {
     display: flex;
     gap: var(--space-xs);
     color: #FFD700;
+}
+
+.stars .star-dim {
+    opacity: 0.55;
 }
 
 .review-count {

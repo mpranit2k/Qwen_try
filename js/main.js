@@ -267,45 +267,18 @@
                     // Account for sticky navbar
                     const navHeight = document.querySelector('.navbar').offsetHeight;
                     const targetPosition = targetElement.offsetTop - navHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+                    const lenis = window.__LENIS__;
+
+                    if (lenis) {
+                        lenis.scrollTo(targetPosition, { duration: 1.1 });
+                    } else {
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
-        });
-    }
-
-    // =========================================
-    // Intersection Observer for Fade-in Animations
-    // =========================================
-    function initFadeInAnimations() {
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe service cards and area cards
-        document.querySelectorAll('.service-card, .area-card, .trust-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
         });
     }
 
@@ -322,12 +295,10 @@
         if ('requestIdleCallback' in window) {
             requestIdleCallback(() => {
                 initWaterAnimation();
-                initFadeInAnimations();
             });
         } else {
             setTimeout(() => {
                 initWaterAnimation();
-                initFadeInAnimations();
             }, 1000);
         }
     }

@@ -12,18 +12,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+
+    <!-- Enable-JS flag so animation initial states only hide content when JS is active -->
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+    <!-- Scroll progress indicator -->
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Custom cursor (desktop only, pointer devices) -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+
     <!-- Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Sticky Mobile Call Bar -->
-    <div class="mobile-call-bar" aria-hidden="true">
+    <div class="mobile-call-bar">
         <a href="tel:9567612620" class="call-btn-mobile">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
             </svg>
-            Call Now
+            Call&nbsp;Now
         </a>
     </div>
 
@@ -43,7 +54,7 @@
                 <li><a href="#service-area">Service Area</a></li>
                 <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="#contact" class="btn btn-nav">Get Quote</a></li>
+                <li><a href="#contact" class="btn btn-nav" data-magnetic>Get Quote</a></li>
             </ul>
         </div>
     </nav>
@@ -51,18 +62,20 @@
     <main id="main-content">
         <!-- Hero Section -->
         <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-bg" aria-hidden="true"></div>
             <div class="hero-overlay"></div>
             <div class="container hero-content">
-                <h1 id="hero-heading">Trusted Plumbing Services in Los Fresnos</h1>
-                <p class="hero-subhead">Family owned &amp; operated. Licensed &amp; insured. Serving the Rio Grande Valley with honest, reliable plumbing since day one.</p>
-                <div class="hero-cta">
-                    <a href="tel:9567612620" class="btn btn-primary btn-large">
+                <h1 id="hero-heading" data-hero-line>
+                    <span class="line-mask"><span class="line-inner">Trusted Plumbing Services</span></span>
+                    <span class="line-mask"><span class="line-inner">in Los Fresnos</span></span>
+                </h1>
+                <p class="hero-subhead" data-hero-fade>Family owned &amp; operated. Licensed &amp; insured. Serving the Rio Grande Valley with honest, reliable plumbing since day one.</p>
+                <div class="hero-cta" data-hero-fade>
+                    <a href="tel:9567612620" class="btn btn-primary btn-large" data-magnetic>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                        </svg>
-                        (956) 761-2620
-                    </a>
-                    <a href="#contact" class="btn btn-secondary btn-large">Request Quote</a>
+                        </svg>(956)&nbsp;761&#8209;2620</a>
+                    <a href="#contact" class="btn btn-secondary btn-large" data-magnetic>Request Quote</a>
                 </div>
             </div>
         </section>
@@ -70,7 +83,7 @@
         <!-- Trust Bar -->
         <section class="trustbar" aria-label="Trust indicators">
             <div class="container trustbar-grid">
-                <div class="trust-item">
+                <div class="trust-item" data-reveal>
                     <div class="trust-icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -81,7 +94,7 @@
                         <span class="trust-label">157 Google Reviews</span>
                     </div>
                 </div>
-                <div class="trust-item">
+                <div class="trust-item" data-reveal>
                     <div class="trust-icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
@@ -92,7 +105,7 @@
                         <span class="trust-label">&amp; Insured</span>
                     </div>
                 </div>
-                <div class="trust-item">
+                <div class="trust-item" data-reveal>
                     <div class="trust-icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
@@ -103,7 +116,7 @@
                         <span class="trust-label">Owned &amp; Operated</span>
                     </div>
                 </div>
-                <div class="trust-item">
+                <div class="trust-item" data-reveal>
                     <div class="trust-icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
@@ -120,11 +133,11 @@
         <!-- Services / Features Section -->
         <section id="services" class="services" aria-labelledby="services-heading">
             <div class="container">
-                <h2 id="services-heading" class="section-title">Our Services</h2>
+                <h2 id="services-heading" class="section-title" data-reveal>Our Services</h2>
                 <p class="section-subtitle">From emergency repairs to installations, we handle it all with professionalism and care.</p>
 
                 <div class="services-grid">
-                    <article class="service-card">
+                    <article class="service-card" data-reveal>
                         <div class="service-icon">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
@@ -134,7 +147,7 @@
                         <p>Available for urgent plumbing emergencies. We respond quickly to minimize damage and restore your system.</p>
                     </article>
 
-                    <article class="service-card">
+                    <article class="service-card" data-reveal>
                         <div class="service-icon">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
@@ -144,7 +157,7 @@
                         <p>Expert installation and repair of tank and tankless water heaters. Get hot water running efficiently again.</p>
                     </article>
 
-                    <article class="service-card">
+                    <article class="service-card" data-reveal>
                         <div class="service-icon">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M19.36 2.72l1.42 1.42c.78.78.78 2.05 0 2.83L9.83 17.92 5.5 19.5l1.58-4.33L18.03 4.14c.78-.78 2.05-.78 2.83 0zM7.88 15.06L6.7 18.3l3.24-1.18 8.88-8.88-1.41-1.41-9.53 8.23z"/>
@@ -154,7 +167,7 @@
                         <p>Clogged drains cleared fast. We use professional equipment to remove blockages and prevent future clogs.</p>
                     </article>
 
-                    <article class="service-card">
+                    <article class="service-card" data-reveal>
                         <div class="service-icon">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v2h-2zm0-10h2v8h-2z"/>
@@ -164,7 +177,7 @@
                         <p>Certified backflow prevention testing to protect your water supply and meet local code requirements.</p>
                     </article>
 
-                    <article class="service-card">
+                    <article class="service-card" data-reveal>
                         <div class="service-icon">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.96-2.36L6.5 17h11l-3.54-4.71z"/>
@@ -174,7 +187,7 @@
                         <p>Bathroom and kitchen plumbing for remodels. From fixture installation to pipe rerouting, we've got you covered.</p>
                     </article>
 
-                    <article class="service-card">
+                    <article class="service-card" data-reveal>
                         <div class="service-icon">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
@@ -190,23 +203,23 @@
         <!-- Service Area Section -->
         <section id="service-area" class="service-area" aria-labelledby="area-heading">
             <div class="container">
-                <h2 id="area-heading" class="section-title">Service Area</h2>
+                <h2 id="area-heading" class="section-title" data-reveal>Service Area</h2>
                 <p class="section-subtitle">Proudly serving communities across the Rio Grande Valley</p>
 
                 <div class="area-grid">
-                    <div class="area-card">
+                    <div class="area-card" data-reveal>
                         <h3>Los Fresnos</h3>
                         <p>Our home base. Fast response times for all residents and businesses.</p>
                     </div>
-                    <div class="area-card">
+                    <div class="area-card" data-reveal>
                         <h3>South Padre Island</h3>
                         <p>Serving vacation rentals and year-round residents on the island.</p>
                     </div>
-                    <div class="area-card">
+                    <div class="area-card" data-reveal>
                         <h3>Port Isabel</h3>
                         <p>Reliable plumbing services for homes and marinas in Port Isabel.</p>
                     </div>
-                    <div class="area-card">
+                    <div class="area-card" data-reveal>
                         <h3>Laguna Vista</h3>
                         <p>Trusted local plumber for Laguna Vista families and properties.</p>
                     </div>
@@ -216,7 +229,7 @@
                     <a href="https://www.google.com/maps/search/?api=1&amp;query=Gator%20Plumbing&amp;query_place_id=ChIJ__8j3SKsb4YRVnJIwzV0JhE"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="btn btn-outline">
+                       class="btn btn-outline" data-magnetic>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                         </svg>
@@ -229,12 +242,12 @@
         <!-- Reviews Section -->
         <section id="reviews" class="reviews" aria-labelledby="reviews-heading">
             <div class="container">
-                <h2 id="reviews-heading" class="section-title">What Our Customers Say</h2>
+                <h2 id="reviews-heading" class="section-title" data-reveal>What Our Customers Say</h2>
 
-                <div class="reviews-highlight">
+                <div class="reviews-highlight" data-reveal>
                     <div class="rating-display">
-                        <span class="rating-number">4.8</span>
-                        <div class="stars" aria-label="4.8 out of 5 stars">
+                        <span class="rating-number" data-countup="4.8" data-countup-decimals="1">0</span>
+                        <div class="stars" role="img" aria-label="4.8 out of 5 stars">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                             </svg>
@@ -247,7 +260,7 @@
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                             </svg>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="opacity: 0.8;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="star-dim">
                                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                             </svg>
                         </div>
@@ -257,7 +270,7 @@
                     <a href="https://www.google.com/maps/search/?api=1&amp;query=Gator%20Plumbing&amp;query_place_id=ChIJ__8j3SKsb4YRVnJIwzV0JhE"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="btn btn-primary">
+                       class="btn btn-primary" data-magnetic>
                         Read All Reviews on Google
                     </a>
                 </div>
@@ -267,18 +280,18 @@
         <!-- FAQ Section -->
         <section id="faq" class="faq" aria-labelledby="faq-heading">
             <div class="container">
-                <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2>
+                <h2 id="faq-heading" class="section-title" data-reveal>Frequently Asked Questions</h2>
 
                 <div class="faq-list">
-                    <details class="faq-item">
+                    <details class="faq-item" data-reveal>
                         <summary>
                             <span>Do you offer emergency plumbing services?</span>
                             <span class="faq-toggle" aria-hidden="true">+</span>
                         </summary>
-                        <p>Yes, we provide emergency plumbing services on Saturdays. For urgent issues during business hours (Monday–Friday, 7am–6pm), call us immediately at (956) 761-2620.</p>
+                        <p>Yes, we provide emergency plumbing services on Saturdays. For urgent issues during business hours (Monday–Friday, 7am–6pm), call us immediately at (956)&nbsp;761&#8209;2620.</p>
                     </details>
 
-                    <details class="faq-item">
+                    <details class="faq-item" data-reveal>
                         <summary>
                             <span>Are you licensed and insured?</span>
                             <span class="faq-toggle" aria-hidden="true">+</span>
@@ -286,7 +299,7 @@
                         <p>Absolutely. Gator Plumbing is fully licensed and insured to operate in Texas. We take pride in our professional credentials and maintain all required certifications.</p>
                     </details>
 
-                    <details class="faq-item">
+                    <details class="faq-item" data-reveal>
                         <summary>
                             <span>What areas do you serve?</span>
                             <span class="faq-toggle" aria-hidden="true">+</span>
@@ -294,7 +307,7 @@
                         <p>We primarily serve Los Fresnos, South Padre Island, Port Isabel, and Laguna Vista. If you're outside these areas, give us a call—we may still be able to help depending on the service needed.</p>
                     </details>
 
-                    <details class="faq-item">
+                    <details class="faq-item" data-reveal>
                         <summary>
                             <span>Do you provide free estimates?</span>
                             <span class="faq-toggle" aria-hidden="true">+</span>
@@ -302,7 +315,7 @@
                         <p>Yes, we offer free quotes for most services. Fill out the form below or call us to discuss your plumbing needs and get an honest, upfront estimate.</p>
                     </details>
 
-                    <details class="faq-item">
+                    <details class="faq-item" data-reveal>
                         <summary>
                             <span>What payment methods do you accept?</span>
                             <span class="faq-toggle" aria-hidden="true">+</span>
@@ -316,13 +329,13 @@
         <!-- Contact / Quote Form Section -->
         <section id="contact" class="contact" aria-labelledby="contact-heading">
             <div class="container contact-container">
-                <div class="contact-info">
-                    <h2 id="contact-heading" class="section-title">Get a Free Quote</h2>
+                <div class="contact-info" data-reveal>
+                    <h2 id="contact-heading" class="section-title" data-reveal>Get a Free Quote</h2>
                     <p>Fill out the form and we'll get back to you promptly. For emergencies, please call directly.</p>
 
                     <div class="info-item">
                         <strong>Phone:</strong>
-                        <a href="tel:9567612620">(956) 761-2620</a>
+                        <a href="tel:9567612620">(956)&nbsp;761&#8209;2620</a>
                     </div>
                     <div class="info-item">
                         <strong>Address:</strong>
@@ -338,7 +351,7 @@
                     </div>
                 </div>
 
-                <form id="quote-form" class="quote-form" novalidate>
+                <form id="quote-form" class="quote-form" data-reveal novalidate>
                     <div class="form-group">
                         <label for="name">Full Name *</label>
                         <input type="text" id="name" name="name" required autocomplete="name">
@@ -389,7 +402,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer" role="contentinfo">
+    <footer class="footer">
         <div class="container footer-content">
             <div class="footer-brand">
                 <span class="logo-text">GATOR<span class="logo-accent">PLUMBING</span></span>
@@ -399,7 +412,7 @@
 
             <div class="footer-contact">
                 <h4>Contact</h4>
-                <p><a href="tel:9567612620">(956) 761-2620</a></p>
+                <p><a href="tel:9567612620">(956)&nbsp;761&#8209;2620</a></p>
                 <p>41786 FM 510, Los Fresnos, TX 78566</p>
             </div>
 
@@ -427,5 +440,12 @@
     </footer>
 
     <script src="js/main.js" defer></script>
+
+    <!-- Awwwards-grade animation layer -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+    <script src="js/motion-templates.js" defer></script>
+    <script src="js/animations.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,116 @@
+/* =============================================
+   Gator Plumbing - Awwwards-grade Animations
+   Scroll progress, custom cursor, reveals, magnetic
+   ============================================= */
+
+/* ---------- Scroll progress bar ---------- */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-orange), #ff9800);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    z-index: var(--z-modal);
+    pointer-events: none;
+}
+
+/* ---------- Custom cursor (fine pointers only) ---------- */
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-orange);
+}
+
+.cursor-ring {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(230, 81, 0, 0.55);
+    transition: transform 0.15s ease-out;
+}
+
+html.has-cursor .cursor-dot,
+html.has-cursor .cursor-ring {
+    opacity: 1;
+}
+
+html.cursor-hover .cursor-ring {
+    transform: scale(1.6);
+    border-color: var(--color-orange);
+}
+
+@media (hover: none), (pointer: coarse) {
+    .cursor-dot,
+    .cursor-ring {
+        display: none !important;
+    }
+}
+
+/* ---------- Reveal initial states (only when JS active) ---------- */
+html.js [data-reveal] {
+    opacity: 0;
+}
+
+/* ---------- Hero line-mask reveal (only when JS active) ---------- */
+.line-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+}
+
+html.js .line-inner {
+    display: inline-block;
+    transform: translateY(115%);
+    will-change: transform;
+}
+
+/* ---------- Navbar glass-on-scroll state ---------- */
+.navbar {
+    transition: background-color 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(10, 25, 47, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 30px rgba(2, 8, 20, 0.35);
+    padding: 0.65rem 0;
+}
+
+.navbar.nav-hidden {
+    transform: translateY(-100%);
+}
+
+/* ---------- FAQ animated height ---------- */
+.faq-item .faq-panel {
+    overflow: hidden;
+}
+
+/* ---------- Reduced motion: kill decorative motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    html.js [data-reveal] {
+        opacity: 1;
+    }
+
+    html.js .line-inner {
+        transform: none;
+    }
+
+    .scroll-progress {
+        display: none;
+    }
+}
