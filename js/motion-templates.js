@@ -38,33 +38,24 @@
 
     /**
      * Magnetic hover for an element.
-     * Emil frequency gate: only primary CTAs, runs once per move.
+     * Emil frequency gate: only primary CTAs. Uses gsap.quickTo
+     * (eased, no per-frame tween churn = no scroll jank).
      */
     function magnetic(el) {
         if (reduced || !finePointer || !el) return;
         var strength = 0.35;
-        var x = 0;
-        var y = 0;
+        var qx = global.gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power2.out' });
+        var qy = global.gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power2.out' });
 
         el.addEventListener('mousemove', function (e) {
             var r = el.getBoundingClientRect();
-            x = (e.clientX - r.left - r.width / 2) * strength;
-            y = (e.clientY - r.top - r.height / 2) * strength;
+            qx((e.clientX - r.left - r.width / 2) * strength);
+            qy((e.clientY - r.top - r.height / 2) * strength);
         });
 
         el.addEventListener('mouseleave', function () {
-            x = 0;
-            y = 0;
-        });
-
-        global.gsap.ticker.add(function () {
-            global.gsap.to(el, {
-                x: x,
-                y: y,
-                duration: 0.4,
-                ease: 'power2.out',
-                overwrite: 'auto'
-            });
+            qx(0);
+            qy(0);
         });
     }
 
@@ -134,36 +125,26 @@
 
     /**
      * Subtle 3D tilt on hover for cards. Jakub polish + Jhey delight:
-     * max 4 degrees, spring return, pointer devices only.
+     * max 4 degrees, eased via quickTo, pointer devices only.
      */
     function tilt(el, opts) {
         if (reduced || !finePointer || !el) return;
         opts = opts || {};
         var max = opts.max || 4;
-        var perspective = opts.perspective || 900;
-        var tx = 0;
-        var ty = 0;
+
+        global.gsap.set(el, { transformPerspective: opts.perspective || 900 });
+        var qx = global.gsap.quickTo(el, 'rotationX', { duration: 0.5, ease: 'power2.out' });
+        var qy = global.gsap.quickTo(el, 'rotationY', { duration: 0.5, ease: 'power2.out' });
 
         el.addEventListener('mousemove', function (e) {
             var r = el.getBoundingClientRect();
-            ty = ((e.clientX - r.left) / r.width - 0.5) * 2 * max;
-            tx = -((e.clientY - r.top) / r.height - 0.5) * 2 * max;
+            qy(((e.clientX - r.left) / r.width - 0.5) * 2 * max);
+            qx(-((e.clientY - r.top) / r.height - 0.5) * 2 * max);
         });
 
         el.addEventListener('mouseleave', function () {
-            tx = 0;
-            ty = 0;
-        });
-
-        global.gsap.ticker.add(function () {
-            global.gsap.to(el, {
-                rotationX: tx,
-                rotationY: ty,
-                transformPerspective: perspective,
-                duration: 0.5,
-                ease: EASING.smooth,
-                overwrite: 'auto'
-            });
+            qx(0);
+            qy(0);
         });
     }
 
@@ -269,12 +250,13 @@
 
     /**
      * Smooth scroll via Lenis wired to GSAP ScrollTrigger (critical setup).
+     * Note: keep lerp-mode ONLY - setting both `lerp` and `duration` makes
+     * duration-mode win in Lenis >=1.x, which feels heavy/floaty on wheel.
      */
     function smoothScroll() {
         if (reduced || typeof global.Lenis === 'undefined') return;
         var lenis = new global.Lenis({
-            lerp: 0.1,
-            duration: 1.2,
+            lerp: 0.12,
             smoothWheel: true
         });
 

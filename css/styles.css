@@ -530,6 +530,110 @@ input, textarea, select {
 }
 
 /* =============================================
+   About / Why Choose Us Section
+   ============================================= */
+.about {
+    padding: var(--space-3xl) 0;
+    background-color: var(--color-white);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+}
+
+.about-media img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    object-fit: cover;
+}
+
+.about-content .section-title {
+    text-align: left;
+}
+
+.about-lede {
+    color: var(--color-gray-600);
+    margin-bottom: var(--space-xl);
+    max-width: 44ch;
+}
+
+.about-points {
+    margin-bottom: var(--space-xl);
+}
+
+.about-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-md);
+    font-weight: 500;
+}
+
+.about-points li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") center / 14px no-repeat;
+    mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") center / 14px no-repeat;
+}
+
+/* =============================================
+   Emergency CTA Band
+   ============================================= */
+.cta-band {
+    position: relative;
+    padding: var(--space-3xl) 0;
+    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-light) 100%);
+    overflow: hidden;
+    text-align: center;
+}
+
+.cta-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('../images/cta-plumber.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    opacity: 0.22;
+}
+
+.cta-band::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 25, 47, 0.55) 0%, rgba(10, 25, 47, 0.85) 100%);
+}
+
+.cta-content {
+    position: relative;
+    z-index: 1;
+}
+
+.cta-content h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: var(--space-md);
+}
+
+.cta-content p {
+    color: var(--color-gray-200);
+    max-width: 560px;
+    margin: 0 auto var(--space-xl);
+    line-height: 1.7;
+}
+
+/* =============================================
    Services Section
    ============================================= */
 .services {
@@ -929,6 +1033,10 @@ input, textarea, select {
     color: var(--color-gray-500);
 }
 
+.footer-credit {
+    margin-top: var(--space-xs);
+}
+
 /* =============================================
    Responsive Styles
    ============================================= */
@@ -983,7 +1091,24 @@ input, textarea, select {
         grid-template-columns: 1fr;
         gap: var(--space-2xl);
     }
-    
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+    }
+
+    .about-content .section-title {
+        text-align: center;
+    }
+
+    .about-content {
+        text-align: center;
+    }
+
+    .about-points {
+        text-align: left;
+    }
+
     .contact-info .section-title {
         text-align: center;
     }
